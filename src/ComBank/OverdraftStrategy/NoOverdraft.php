@@ -7,8 +7,16 @@
  * Time: 12:27 PM
  */
 
-class NoOverdraft 
+class NoOverdraft implements Contracts\OverdraftInterface
 {
+    public function isGrantOverdraftFunds(float $amount): bool
+    {
+        return false;
+    }
 
+    public function getOverdraftFundsAmount(): float
+    {
+        return 0.0;
+    }
    
 }

@@ -10,8 +10,21 @@
 /**
  * @description: Grant 100.00 overdraft funds.
  * */
-class SilverOverdraft 
+class SilverOverdraft implements Contracts\OverdraftInterface
 {
 
-    
+    public function isGrantOverdraftFunds(float $amount): bool
+    {
+        $quantity = $amount + $this->getOverdraftFundsAmount();
+        if($quantity >= 0){
+            return true;
+        }
+        return false;
+    }
+
+    public function getOverdraftFundsAmount(): float
+    {
+        return 100.00;
+    }
+
 }
