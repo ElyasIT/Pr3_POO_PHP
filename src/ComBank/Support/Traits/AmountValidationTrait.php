@@ -1,4 +1,6 @@
-<?php namespace ComBank\Support\Traits;
+<?php
+
+namespace ComBank\Support\Traits;
 
 /**
  * Created by VS Code.
@@ -17,8 +19,16 @@ trait AmountValidationTrait
      * @throws InvalidArgsException
      * @throws ZeroAmountException
      */
-    public function validateAmount(float $amount):void
+    public function validateAmount(float $amount): void {
+
+        if ($amount <= 0) {
+            throw new ZeroAmountException();
+        }
+    }
+    private function validateemail(string $email): void
     {
-        
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            throw new InvalidArgsException('Invalid email format');
+        }
     }
 }
