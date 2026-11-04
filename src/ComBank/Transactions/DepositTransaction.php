@@ -20,6 +20,7 @@ class DepositTransaction extends BaseTransaction implements BankTransactionInter
         if ($amount <= 0) {
             throw new ZeroAmountException('The transaction amount must be greater than zero.');
         }
+        $this->amount = $amount;
     }
 
     public function applyTransaction(BankAccountInterface $account): float
