@@ -1,4 +1,6 @@
-<?php namespace ComBank\OverdraftStrategy;
+<?php
+
+namespace ComBank\OverdraftStrategy;
 
 /**
  * Created by VS Code.
@@ -18,5 +20,9 @@ class NoOverdraft implements Contracts\OverdraftInterface
     {
         return 0.0;
     }
-   
+
+    public function getIntrestRate(): int
+    {
+        return 1;
+    }
 }

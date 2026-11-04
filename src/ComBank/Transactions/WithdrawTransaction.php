@@ -1,4 +1,6 @@
-<?php namespace ComBank\Transactions;
+<?php
+
+namespace ComBank\Transactions;
 
 /**
  * Created by VS Code.
@@ -19,6 +21,7 @@ class WithdrawTransaction implements BankTransactionInterface
         if ($amount <= 0) {
             throw new ZeroAmountException('The transaction amount must be greater than zero.');
         }
+        $this->amount = $amount;
     }
 
     public function applyTransaction(BankAccountInterface $account): float
