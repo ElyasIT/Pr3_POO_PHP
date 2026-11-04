@@ -1,4 +1,6 @@
-<?php namespace ComBank\OverdraftStrategy\Contracts;
+<?php
+
+namespace ComBank\OverdraftStrategy\Contracts;
 
 /**
  * Created by VS Code.
@@ -9,7 +11,9 @@
 
 interface OverdraftInterface
 {
- public function isGrantOverdraftFunds(float $amount): bool;
+    public function isGrantOverdraftFunds(float $amount): bool;
 
- public function getOverdraftFundsAmount(): float;
+    public function getOverdraftFundsAmount(): float;
+
+    public function getIntrestRate(): int;
 }

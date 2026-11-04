@@ -1,4 +1,6 @@
-<?php namespace ComBank\Bank\Contracts;
+<?php
+
+namespace ComBank\Bank\Contracts;
 
 /**
  * Created by VS Code.

@@ -13,6 +13,8 @@ use ComBank\Transactions\DepositTransaction;
 use ComBank\Transactions\WithdrawTransaction;
 use ComBank\Exceptions\FailedTransactionException;
 use ComBank\Exceptions\InvalidArgsException;
+use ComBank\OverdraftStrategy\GoldOverdraft;
+use ComBank\Transactions\InterestTransaction;
 
 require_once 'bootstrap.php';
 
@@ -87,4 +89,14 @@ try {
     pl('Account 4 email: ' . $bankAccount4->getemail());
 } catch (InvalidArgsException $e) {
     pl('Error creating account: ' . $e->getMessage());
+}
+
+try {
+    pl('--------- [Account 5: Email Validation] --------');
+    $bankAccount5 = new BankAccount(500.0);
+    $bankAccount5->applyOverdraft(new GoldOverdraft());
+    $bankAccount5->transaction(new InterestTransaction());
+    pl('Balance after Interest Transaction: ' . $bankAccount5->getBalance());
+} catch (InvalidArgsException $exception) {
+    pl('Invalid argument: ' . $exception->getMessage());
 }

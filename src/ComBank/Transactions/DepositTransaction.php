@@ -1,4 +1,6 @@
-<?php namespace ComBank\Transactions;
+<?php
+
+namespace ComBank\Transactions;
 
 /**
  * Created by VS Code.
@@ -11,9 +13,9 @@ use ComBank\Bank\Contracts\BankAccountInterface;
 use ComBank\Exceptions\ZeroAmountException;
 use ComBank\Transactions\Contracts\BankTransactionInterface;
 
-class DepositTransaction implements BankTransactionInterface
+class DepositTransaction extends BaseTransaction implements BankTransactionInterface
 {
-    public function __construct(private float $amount)
+    public function __construct(float $amount)
     {
         if ($amount <= 0) {
             throw new ZeroAmountException('The transaction amount must be greater than zero.');
@@ -34,5 +36,4 @@ class DepositTransaction implements BankTransactionInterface
     {
         return $this->amount;
     }
-
 }

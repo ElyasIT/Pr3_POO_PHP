@@ -1,4 +1,8 @@
-<?php namespace ComBank\OverdraftStrategy;
+<?php
+
+namespace ComBank\OverdraftStrategy;
+
+use Override;
 
 /**
  * Created by VS Code.
@@ -16,7 +20,7 @@ class SilverOverdraft implements Contracts\OverdraftInterface
     public function isGrantOverdraftFunds(float $amount): bool
     {
         $quantity = $amount + $this->getOverdraftFundsAmount();
-        if($quantity >= 0){
+        if ($quantity >= 0) {
             return true;
         }
         return false;
@@ -27,4 +31,8 @@ class SilverOverdraft implements Contracts\OverdraftInterface
         return 100.00;
     }
 
+    public function getIntrestRate(): int
+    {
+        return 5;
+    }
 }
