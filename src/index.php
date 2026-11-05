@@ -15,6 +15,7 @@ use ComBank\Exceptions\FailedTransactionException;
 use ComBank\Exceptions\InvalidArgsException;
 use ComBank\OverdraftStrategy\GoldOverdraft;
 use ComBank\Transactions\InterestTransaction;
+use ComBank\Transactions\TransferTransaction;
 
 require_once 'bootstrap.php';
 
@@ -99,4 +100,40 @@ try {
     pl('Balance after Interest Transaction: ' . $bankAccount5->getBalance());
 } catch (InvalidArgsException $exception) {
     pl('Invalid argument: ' . $exception->getMessage());
+}
+
+try {
+    pl('--------- [Account 6, 7: transfer transaction] --------');
+    $bankAccount6 = new BankAccount(500.0);
+    $bankAccount7 = new BankAccount(200.0);
+
+    pl('Source Account Balance: ' . $bankAccount6->getBalance());
+    pl('Destination Account Balance: ' . $bankAccount7->getBalance());
+    pl('Transfer Amount: €100.00');
+
+    $bankAccount6->transaction(new TransferTransaction(100.0, $bankAccount7));
+
+    pl('Source Balance After Transaction: ' . $bankAccount6->getBalance());
+    pl('Destination Balance After Transaction: ' . $bankAccount7->getBalance());
+} catch (FailedTransactionException $exception) {
+    pl('transfer rejected ' . $exception->getMessage());
+} catch (InvalidArgsException $exception) {
+    pl('transfer rejected ' . $exception->getMessage());
+}
+
+try {
+    pl('--------- [Account 8, 9: transfer transaction error ] --------');
+    $bankAccount8 = new BankAccount(50.00);
+    $bankAccount9 = new BankAccount(200.00);
+    pl('Source Account Balance: ' . $bankAccount8->getBalance());
+    pl('Destination Account Balance: ' . $bankAccount9->getBalance());
+    pl('Transfer Amount: €100.00');
+
+    $bankAccount8->transaction(new TransferTransaction(100.00, $bankAccount9));
+    pl('Source Balance After Transaction: ' . $bankAccount8->getBalance());
+    pl('Destination Balance After Transaction: ' . $bankAccount9->getBalance());
+} catch (FailedTransactionException $exception) {
+    pl('Result: ' . $exception->getMessage());
+} catch (InvalidArgsException $exception) {
+    pl('Result: ' . $exception->getMessage());
 }
